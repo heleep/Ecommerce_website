@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrendyThreads - Premium Clothing Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fafbfc;
+            color: #1a1a2e;
+        }
+
+        /* Premium Navbar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            cursor: pointer;
+        }
+
+        .logo i {
+            background: none;
+            -webkit-background-clip: unset;
+            color: #667eea;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #4a5568;
+        }
+
+        .nav-btn:hover {
+            background: #f7fafc;
+            transform: translateY(-2px);
+        }
+
+        .cart-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 4rem 5%;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 2rem 5%;
+            background: white;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .cat-btn {
+            padding: 0.75rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            background: transparent;
+            border: 2px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #4a5568;
+        }
+
+        .cat-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .cat-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: transparent;
+            color: white;
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 3rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #1a1a2e;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #1a1a2e;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #667eea;
+            margin: 0.5rem 0;
+        }
+
+        .product-stock {
+            font-size: 0.85rem;
+            color: #48bb78;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 24px;
+            max-width: 550px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 2rem;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #a0aec0;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #4a5568;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            width: 100%;
+            background: #f7fafc;
+            color: #4a5568;
+            border: 2px solid #e2e8f0;
+            padding: 0.8rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 0.5rem;
+        }
+
+        /* Cart Items */
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            align-items: center;
+        }
+
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .cart-item-price {
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        .qty-btn {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            padding: 0.25rem 0.6rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 0 0.25rem;
+            transition: all 0.2s;
+        }
+
+        .qty-btn:hover {
+            background: #e2e8f0;
+        }
+
+        .remove-btn {
+            background: #fed7d7;
+            color: #e53e3e;
+            border: none;
+            padding: 0.25rem 0.6rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            display: grid;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .payment-btn {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-btn:hover {
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .payment-btn i {
+            font-size: 1.5rem;
+            color: #667eea;
+        }
+
+        .qr-container {
+            text-align: center;
+            padding: 1.5rem;
+            background: #f7fafc;
+            border-radius: 16px;
+            margin: 1rem 0;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 3000;
+            animation: slideInRight 0.3s ease;
+            font-weight: 500;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1rem;
+            }
+            
+            .category-tabs {
+                padding: 1rem;
+            }
+            
+            .cat-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #e2e8f0;
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #a0aec0;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo" onclick="location.reload()">
+            <i class="fas fa-tshirt"></i> TrendyThreads
+        </div>
+        <div class="nav-links">
+            <button class="nav-btn" id="ordersBtn">
+                <i class="fas fa-history"></i> My Orders
+            </button>
+            <button class="nav-btn cart-btn" id="cartBtn">
+                <i class="fas fa-shopping-cart"></i> Cart
+                <span id="cartCount" style="background: white; color: #667eea; border-radius: 20px; padding: 0.2rem 0.6rem; margin-left: 5px;">0</span>
+            </button>
+            <div id="authButtons">
+                <button class="nav-btn" id="loginBtn">
+                    <i class="fas fa-user"></i> Login
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Elevate Your Style</h1>
+        <p>Discover the latest trends in premium clothing</p>
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="category-tabs">
+        <button class="cat-btn active" data-cat="kurti">👗 Kurti Collection</button>
+        <button class="cat-btn" data-cat="tshirt">👕 T-Shirts & Tops</button>
+        <button class="cat-btn" data-cat="nightwear">🌙 Night Wear</button>
+    </div>
+
+    <!-- Products Section -->
+    <div class="products-section">
+        <div class="product-grid" id="productGrid">
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Welcome Back</h2>
+                <button class="close-modal" onclick="closeModal('loginModal')">&times;</button>
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="loginEmail" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter your password">
+            </div>
+            <button class="btn-primary" onclick="login()">Login</button>
+            <button class="btn-secondary" onclick="showRegister()">Create New Account</button>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create Account</h2>
+                <button class="close-modal" onclick="closeModal('registerModal')">&times;</button>
+            </div>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="regUsername" placeholder="Choose a username">
+            </div>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="regFullName" placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="regEmail" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" id="regPhone" placeholder="Enter your phone number">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="regPassword" placeholder="Create a password">
+            </div>
+            <button class="btn-primary" onclick="register()">Register</button>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-shopping-bag"></i> Your Cart</h2>
+                <button class="close-modal" onclick="closeModal('cartModal')">&times;</button>
+            </div>
+            <div id="cartItems"></div>
+            <div style="margin-top: 1rem; padding-top: 1rem; border-top: 2px solid #e2e8f0;">
+                <div style="display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 700;">
+                    <span>Total:</span>
+                    <span style="color: #667eea;">₹<span id="cartTotal">0</span></span>
+                </div>
+                <button class="btn-primary" onclick="checkout()" style="margin-top: 1rem;">
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Select Payment Method</h2>
+                <button class="close-modal" onclick="closeModal('paymentModal')">&times;</button>
+            </div>
+            <div class="payment-methods">
+                <div class="payment-btn" onclick="processPayment('cod')">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <div>
+                        <strong>Cash on Delivery</strong>
+                        <p style="font-size: 0.85rem; color: #718096;">Pay when you receive</p>
+                    </div>
+                </div>
+                <div class="payment-btn" onclick="showQRPayment()">
+                    <i class="fas fa-qrcode"></i>
+                    <div>
+                        <strong>QR Code Payment</strong>
+                        <p style="font-size: 0.85rem; color: #718096;">Scan with any UPI app</p>
+                    </div>
+                </div>
+                <div class="payment-btn" onclick="processPayment('gpay')">
+                    <i class="fab fa-google-pay"></i>
+                    <div>
+                        <strong>Google Pay / Razorpay</strong>
+                        <p style="font-size: 0.85rem; color: #718096;">Fast & secure</p>
+                    </div>
+                </div>
+            </div>
+            <div id="qrSection" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Invoice Modal -->
+    <div id="invoiceModal" class="modal">
+        <div class="modal-content" style="max-width: 700px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-file-invoice"></i> Order Invoice</h2>
+                <button class="close-modal" onclick="closeModal('invoiceModal')">&times;</button>
+            </div>
+            <div id="invoiceContent"></div>
+            <button class="btn-primary" id="downloadInvoiceBtn" style="margin-top: 1rem;">
+                <i class="fas fa-download"></i> Download PDF Invoice
+            </button>
+        </div>
+    </div>
+
+    <!-- Orders Modal -->
+    <div id="ordersModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-history"></i> My Orders</h2>
+                <button class="close-modal" onclick="closeModal('ordersModal')">&times;</button>
+            </div>
+            <div id="ordersList"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = null;
+        let currentCategory = 'kurti';
+        let cart = [];
+        let currentOrder = null;
+
+        // API Helper
+        async function apiCall(url, options = {}) {
+            try {
+                const response = await fetch(url, {
+                    ...options,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    }
+                });
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                return await response.json();
+            } catch (error) {
+                console.error('API Error:', error);
+                showToast(error.message, 'error');
+                return null;
+            }
+        }
+
+        function showToast(message, type = 'success') {
+            const colors = {
+                success: 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)',
+                error: 'linear-gradient(135deg, #f56565 0%, #e53e3e 100%)',
+                info: 'linear-gradient(135deg, #4299e1 0%, #3182ce 100%)'
+            };
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.style.background = colors[type];
+            toast.style.color = 'white';
+            toast.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i> ${message}`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        async function loadProducts() {
+            const products = await apiCall(`/api/products?category=${currentCategory}`);
+            const grid = document.getElementById('productGrid');
+            if (!products || products.length === 0) {
+                grid.innerHTML = '<div class="empty-state"><i class="fas fa-box-open"></i><p>No products found</p></div>';
+                return;
+            }
+            grid.innerHTML = products.map(p => `
+                <div class="product-card">
+                    ${p.stock < 5 ? '<div class="product-badge">Low Stock</div>' : ''}
+                    <img class="product-img" src="${p.image_url}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/300'">
+                    <div class="product-info">
+                        <div class="product-title">${escapeHtml(p.name)}</div>
+                        <div class="product-price">₹${p.price.toFixed(2)}</div>
+                        <div class="product-stock">${p.stock > 0 ? `${p.stock} in stock` : 'Out of stock'}</div>
+                        <button class="add-to-cart" onclick="addToCart(${p.id})" ${p.stock <= 0 ? 'disabled style="opacity:0.5"' : ''}>
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function addToCart(productId) {
+            if (!currentUser) {
+                showToast('Please login first', 'error');
+                openModal('loginModal');
+                return;
+            }
+            const result = await apiCall('/api/cart', {
+                method: 'POST',
+                body: JSON.stringify({ product_id: productId, quantity: 1 })
+            });
+            if (result && result.success) {
+                showToast('Added to cart!', 'success');
+                loadCart();
+            } else {
+                showToast(result?.message || 'Failed to add', 'error');
+            }
+        }
+
+        async function loadCart() {
+            if (!currentUser) {
+                document.getElementById('cartCount').innerText = '0';
+                return;
+            }
+            const cartItems = await apiCall('/api/cart');
+            if (cartItems) {
+                cart = cartItems;
+                const totalItems = cart.reduce((sum, i) => sum + i.quantity, 0);
+                document.getElementById('cartCount').innerText = totalItems;
+                
+                const cartDiv = document.getElementById('cartItems');
+                if (!cartDiv) return;
+                
+                if (cart.length === 0) {
+                    cartDiv.innerHTML = '<div class="empty-state"><i class="fas fa-shopping-cart"></i><p>Your cart is empty</p></div>';
+                    document.getElementById('cartTotal').innerText = '0';
+                    return;
+                }
+                
+                const total = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+                cartDiv.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <img src="${item.image_url}" onerror="this.src='https://via.placeholder.com/80'">
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">${escapeHtml(item.name)}</div>
+                            <div class="cart-item-price">₹${item.price}</div>
+                            <div>
+                                <button class="qty-btn" onclick="updateCartItem(${item.id}, ${item.quantity + 1})">+</button>
+                                <span style="margin: 0 10px;">${item.quantity}</span>
+                                <button class="qty-btn" onclick="updateCartItem(${item.id}, ${item.quantity - 1})">-</button>
+                                <button class="remove-btn" onclick="removeCartItem(${item.id})">Remove</button>
+                            </div>
+                        </div>
+                        <div style="font-weight: 700; color: #667eea;">₹${(item.price * item.quantity).toFixed(2)}</div>
+                    </div>
+                `).join('');
+                document.getElementById('cartTotal').innerText = total.toFixed(2);
+            }
+        }
+
+        async function updateCartItem(cartId, newQuantity) {
+            if (newQuantity <= 0) {
+                await removeCartItem(cartId);
+                return;
+            }
+            const result = await apiCall(`/api/cart/${cartId}`, {
+                method: 'PUT',
+                body: JSON.stringify({ quantity: newQuantity })
+            });
+            if (result && result.success) loadCart();
+        }
+
+        async function removeCartItem(cartId) {
+            const result = await apiCall(`/api/cart/${cartId}`, { method: 'DELETE' });
+            if (result && result.success) {
+                loadCart();
+                showToast('Item removed', 'info');
+            }
+        }
+
+        async function checkout() {
+            if (cart.length === 0) {
+                showToast('Your cart is empty', 'error');
+                return;
+            }
+            closeModal('cartModal');
+            openModal('paymentModal');
+        }
+
+        async function processPayment(method) {
+            const shippingAddress = prompt('Please enter your complete shipping address:');
+            if (!shippingAddress) {
+                showToast('Shipping address is required', 'error');
+                return;
+            }
+            
+            const result = await apiCall('/api/orders', {
+                method: 'POST',
+                body: JSON.stringify({
+                    payment_method: method,
+                    shipping_address: shippingAddress
+                })
+            });
+            
+            if (result && result.success) {
+                currentOrder = result;
+                showInvoice(result.order, result.items);
+                closeModal('paymentModal');
+                loadCart();
+                showToast(`Order placed! ID: ${result.order.order_number}`, 'success');
+            } else {
+                showToast(result?.message || 'Order failed', 'error');
+            }
+        }
+
+        function showQRPayment() {
+            const total = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+            const qrDiv = document.getElementById('qrSection');
+            qrDiv.style.display = 'block';
+            qrDiv.innerHTML = `
+                <div class="qr-container">
+                    <i class="fas fa-qrcode" style="font-size: 70px; color: #667eea;"></i>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=trendythreads@okhdfc&pn=TrendyThreads&am=${total}&cu=INR" 
+                         alt="QR Code" style="margin: 1rem 0; border-radius: 12px;">
+                    <p style="font-weight: 600;">Amount: ₹${total.toFixed(2)}</p>
+                    <p style="font-size: 0.85rem;">Scan with any UPI app</p>
+                    <button class="btn-primary" onclick="processPayment('qr')" style="margin-top: 1rem;">
+                        Confirm Payment
+                    </button>
+                </div>
+            `;
+        }
+
+        function showInvoice(order, items) {
+            const invoiceDiv = document.getElementById('invoiceContent');
+            const subtotal = order.total_amount;
+            const tax = subtotal * 0.05;
+            const grandTotal = subtotal + tax;
+            
+            invoiceDiv.innerHTML = `
+                <div style="text-align: center; border-bottom: 2px solid #667eea; padding-bottom: 1rem; margin-bottom: 1rem;">
+                    <h2 style="color: #667eea;">TRENDYTHREADS</h2>
+                    <p style="color: #718096;">Premium Clothing Store</p>
+                    <p style="font-size: 0.85rem;">123 Fashion Avenue, New Delhi | support@trendythreads.com</p>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem;">
+                    <div>
+                        <p><strong>Invoice #:</strong> ${order.order_number}</p>
+                        <p><strong>Date:</strong> ${new Date(order.created_at).toLocaleDateString()}</p>
+                    </div>
+                    <div>
+                        <p><strong>Payment:</strong> ${order.payment_method.toUpperCase()}</p>
+                        <p><strong>Status:</strong> ${order.payment_status}</p>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <h3>Customer Details</h3>
+                    <p><strong>Name:</strong> ${escapeHtml(order.full_name || 'Guest')}</p>
+                    <p><strong>Email:</strong> ${escapeHtml(order.email)}</p>
+                    <p><strong>Address:</strong> ${escapeHtml(order.shipping_address || 'Not provided')}</p>
+                </div>
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 1rem;">
+                    <thead>
+                        <tr style="background: #f7fafc;">
+                            <th style="padding: 0.75rem; text-align: left;">Product</th>
+                            <th style="padding: 0.75rem; text-align: center;">Qty</th>
+                            <th style="padding: 0.75rem; text-align: right;">Price</th>
+                            <th style="padding: 0.75rem; text-align: right;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${items.map(item => `
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 0.75rem;">${escapeHtml(item.product_name)}</td>
+                                <td style="padding: 0.75rem; text-align: center;">${item.quantity}</td>
+                                <td style="padding: 0.75rem; text-align: right;">₹${item.price.toFixed(2)}</td>
+                                <td style="padding: 0.75rem; text-align: right;">₹${(item.price * item.quantity).toFixed(2)}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                    <tfoot>
+                        <tr><td colspan="3" style="padding: 0.75rem; text-align: right;"><strong>Subtotal:</strong></td><td style="text-align: right;">₹${subtotal.toFixed(2)}</td></tr>
+                        <tr><td colspan="3" style="padding: 0.75rem; text-align: right;"><strong>GST (5%):</strong></td><td style="text-align: right;">₹${tax.toFixed(2)}</td></tr>
+                        <tr style="background: #f7fafc;"><td colspan="3" style="padding: 0.75rem; text-align: right;"><strong>Grand Total:</strong></td><td style="text-align: right;"><strong style="color: #667eea;">₹${grandTotal.toFixed(2)}</strong></td></tr>
+                    </tfoot>
+                </table>
+                <div style="text-align: center; padding-top: 1rem; border-top: 1px solid #e2e8f0;">
+                    <p>Thank you for shopping with TrendyThreads!</p>
+                    <p style="font-size: 0.85rem; color: #718096;">This is a computer generated invoice</p>
+                </div>
+            `;
+            
+            openModal('invoiceModal');
+            document.getElementById('downloadInvoiceBtn').onclick = () => {
+                window.open(`/api/orders/${order.order_number}/invoice`, '_blank');
+            };
+        }
+
+        async function loadUserOrders() {
+            if (!currentUser) {
+                showToast('Please login first', 'error');
+                return;
+            }
+            const orders = await apiCall('/api/orders/user');
+            const ordersDiv = document.getElementById('ordersList');
+            if (!orders || orders.length === 0) {
+                ordersDiv.innerHTML = '<div class="empty-state"><i class="fas fa-box-open"></i><p>No orders yet</p></div>';
+                return;
+            }
+            ordersDiv.innerHTML = orders.map(order => `
+                <div style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <strong>Order #${order.order_number}</strong>
+                        <span style="color: #667eea;">₹${order.total_amount.toFixed(2)}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: #718096;">
+                        <span>${new Date(order.created_at).toLocaleDateString()}</span>
+                        <span>${order.payment_method.toUpperCase()}</span>
+                        <span>${order.order_status}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function login() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            if (!email || !password) {
+                showToast('Please enter email and password', 'error');
+                return;
+            }
+            const result = await apiCall('/api/login', {
+                method: 'POST',
+                body: JSON.stringify({ email, password })
+            });
+            if (result && result.success) {
+                currentUser = result.user;
+                showToast(`Welcome back, ${currentUser.username}!`, 'success');
+                closeModal('loginModal');
+                document.getElementById('authButtons').innerHTML = `
+                    <span style="margin-right: 1rem; color: #4a5568;">Hi, ${escapeHtml(currentUser.username)}</span>
+                    <button class="nav-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                `;
+                loadCart();
+                loadProducts();
+            } else {
+                showToast('Invalid credentials', 'error');
+            }
+        }
+
+        async function register() {
+            const userData = {
+                username: document.getElementById('regUsername').value,
+                email: document.getElementById('regEmail').value,
+                full_name: document.getElementById('regFullName').value,
+                phone: document.getElementById('regPhone').value,
+                password: document.getElementById('regPassword').value
+            };
+            if (!userData.username || !userData.email || !userData.password) {
+                showToast('Please fill all required fields', 'error');
+                return;
+            }
+            const result = await apiCall('/api/register', {
+                method: 'POST',
+                body: JSON.stringify(userData)
+            });
+            if (result && result.success) {
+                showToast('Registration successful! Please login.', 'success');
+                closeModal('registerModal');
+                openModal('loginModal');
+            } else {
+                showToast(result?.message || 'Registration failed', 'error');
+            }
+        }
+
+        async function logout() {
+            await apiCall('/api/logout', { method: 'POST' });
+            currentUser = null;
+            cart = [];
+            document.getElementById('cartCount').innerText = '0';
+            document.getElementById('authButtons').innerHTML = '<button class="nav-btn" id="loginBtn"><i class="fas fa-user"></i> Login</button>';
+            document.getElementById('loginBtn').onclick = () => openModal('loginModal');
+            showToast('Logged out successfully', 'info');
+            loadProducts();
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function showRegister() {
+            closeModal('loginModal');
+            openModal('registerModal');
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Event Listeners
+        document.querySelectorAll('.cat-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentCategory = btn.dataset.cat;
+                loadProducts();
+            });
+        });
+
+        document.getElementById('cartBtn').onclick = () => {
+            if (!currentUser) {
+                showToast('Please login first', 'error');
+                openModal('loginModal');
+                return;
+            }
+            loadCart();
+            openModal('cartModal');
+        };
+
+        document.getElementById('ordersBtn').onclick = () => {
+            if (!currentUser) {
+                showToast('Please login first', 'error');
+                openModal('loginModal');
+                return;
+            }
+            loadUserOrders();
+            openModal('ordersModal');
+        };
+
+        // Check session on load
+        fetch('/api/check-session')
+            .then(res => res.json())
+            .then(data => {
+                if (data.logged_in) {
+                    currentUser = data.user;
+                    document.getElementById('authButtons').innerHTML = `
+                        <span style="margin-right: 1rem; color: #4a5568;">Hi, ${escapeHtml(currentUser.username)}</span>
+                        <button class="nav-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                    `;
+                    loadCart();
+                } else {
+                    document.getElementById('loginBtn').onclick = () => openModal('loginModal');
+                }
+            });
+
+        loadProducts();
+
+        // Close modals on background click
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
